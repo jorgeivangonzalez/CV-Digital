@@ -75,6 +75,10 @@ header:after {
     background:  linear-gradient(135deg, #4a90e2, #9b59b6);
 }
 
+.btn-download:nth-child(2) {
+    background:  linear-gradient(135deg, #4a90e2, #50c878);
+}
+
 .btn-download:last-child {
     background:linear-gradient(135deg, #f39c12, #e74c3c);
 }
