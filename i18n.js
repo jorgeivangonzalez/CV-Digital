@@ -26,6 +26,15 @@
         document.body.appendChild(credly);
     }
 
+    /* ---------- Top bar: reveal its language switch once the header card is out of view ---------- */
+    var header = document.querySelector('header');
+    var bar = document.querySelector('.topbar');
+    if (header && bar && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+            bar.classList.toggle('show-switch', !entries[0].isIntersecting);
+        }, { rootMargin: '-48px 0px 0px 0px' }).observe(header);   // 48px = height of the top bar
+    }
+
     /* ---------- Language switch ---------- */
     function setLang(lang) {
         $('[data-en]').forEach(function (el) {
