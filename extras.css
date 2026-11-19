@@ -1,0 +1,76 @@
+/* Load after style.css. Adds: top bar + language switch, header layout, impact strip, reels, diploma carousel */
+
+body { padding-top: 76px; }
+
+/* Top bar */
+.topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    height: 48px; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+}
+.topbar-name { font-weight: 600; font-size: 0.95em; letter-spacing: 0.3px; }
+.lang-switch { display: flex; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; overflow: hidden; }
+.lang-switch button {
+    font: inherit; font-size: 0.8em; font-weight: 600; letter-spacing: 1px;
+    padding: 6px 16px; border: 0; background: transparent; color: #d0d0d0; cursor: pointer;
+}
+.lang-switch button[aria-pressed="true"] { background: #ffffff; color: #1a1a1a; }
+.lang-switch button:focus-visible { outline: 2px solid #4a90e2; outline-offset: -2px; }
+
+/* Header */
+header { text-align: center; }
+header a { color: #d9d9d9; }
+.profile-photo {
+    display: block; width: 150px; height: 150px; margin: 0 auto 22px;
+    border-radius: 50%; object-fit: cover; object-position: center top;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+}
+.subtitle { text-align: center; }
+.roles { justify-content: center; margin-top: 20px; }
+.roles span.primary { background: #ffffff; color: #1a1a1a; border-color: #ffffff; font-weight: 600; }
+.contact { justify-content: center; }
+
+/* Impact strip */
+.impact {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    padding: 0 70px 10px; text-align: center; background: #ffffff;
+}
+.impact strong { display: block; font-family: 'Poppins', sans-serif; font-size: 2em; line-height: 1.1; color: #1a1a1a; }
+.impact span { font-size: 0.8em; color: #666; }
+
+/* Extra project list */
+.more-list { list-style: none; margin-top: 10px; }
+.more-list li { position: relative; padding: 8px 0 8px 18px; font-size: 0.9em; color: #555; border-bottom: 1px solid #eee; }
+.more-list li:before { content: ""; position: absolute; left: 0; top: 1.05em; width: 6px; height: 6px; border-radius: 50%; background: #4a90e2; }
+
+/* Diploma carousel (one row, auto-sliding loop) */
+.carousel {
+    overflow: hidden; margin: 0 -70px; padding: 10px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.cert-track { display: flex; align-items: center; width: max-content; animation: cert-scroll 40s linear infinite; }
+.carousel:hover .cert-track, .carousel:focus-within .cert-track { animation-play-state: paused; }
+.cert-card { flex: none; width: 280px; margin-right: 20px; text-align: center; text-decoration: none; color: #444; font-size: 0.82em; line-height: 1.4; }
+.cert-card img {
+    display: block; width: 100%; height: 200px; margin-bottom: 8px;
+    object-fit: contain; background: #f4f4f4; border: 1px solid #e8e8e8; border-radius: 6px;
+}
+.cert-card:hover img { border-color: #4a90e2; }
+.cert-card:focus-visible { outline: 2px solid #4a90e2; outline-offset: 3px; }
+.cert-embed { width: 150px; height: 270px; }
+@keyframes cert-scroll { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .cert-track { animation: none; }
+    .carousel { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+}
+
+@media (max-width: 768px) {
+    .topbar { padding: 0 15px; }
+    .impact { grid-template-columns: repeat(2, 1fr); padding: 0 30px 10px; }
+    .carousel { margin: 0 -30px; }
+}
