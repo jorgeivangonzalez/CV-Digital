@@ -12,7 +12,12 @@ body { padding-top: 76px; }
     color: #ffffff;
 }
 .topbar-name { font-weight: 600; font-size: 0.95em; letter-spacing: 0.3px; }
-.lang-switch { display: flex; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; overflow: hidden; }
+
+/* Language switch: lives in the header card; the top bar copy appears once the header scrolls out of view */
+.lang-switch { display: flex; border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 20px; overflow: hidden; }
+header .lang-switch { position: absolute; top: 20px; right: 24px; z-index: 5; }
+.topbar .lang-switch { opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0.25s; }
+.topbar.show-switch .lang-switch { opacity: 1; visibility: visible; }
 .lang-switch button {
     font: inherit; font-size: 0.8em; font-weight: 600; letter-spacing: 1px;
     padding: 6px 16px; border: 0; background: transparent; color: #d0d0d0; cursor: pointer;
@@ -44,22 +49,26 @@ header a { color: #d9d9d9; }
 /* Extra project list */
 .more-list { list-style: none; margin-top: 10px; }
 .more-list li { position: relative; padding: 8px 0 8px 18px; font-size: 0.9em; color: #555; border-bottom: 1px solid #eee; }
-.more-list li:before { content: ""; position: absolute; left: 0; top: 1.05em; width: 6px; height: 6px; border-radius: 50%; background: #4a90e2; }
+.more-list li:before { content: ""; position: absolute; left: 0; top: 1.05em; width: 6px; height: 6px; border-radius: 50%; background: #50c878; }
+.more-list li:last-child { border-bottom: 0; }
+
+.section-note { margin: -14px 0 24px; font-size: 0.9em; color: #666; }
 
 /* Diploma carousel (one row, auto-sliding loop) */
 .carousel {
-    overflow: hidden; margin: 0 -70px; padding: 10px 0;
+    overflow: hidden; margin: 0 -70px; padding: 24px 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 .cert-track { display: flex; align-items: center; width: max-content; animation: cert-scroll 40s linear infinite; }
 .carousel:hover .cert-track, .carousel:focus-within .cert-track { animation-play-state: paused; }
-.cert-card { flex: none; width: 280px; margin-right: 20px; text-align: center; text-decoration: none; color: #444; font-size: 0.82em; line-height: 1.4; }
+.cert-card { flex: none; width: 280px; margin-right: 20px; text-align: center; text-decoration: none; color: #444; font-size: 0.82em; line-height: 1.4; position: relative; transition: transform 0.25s ease; }
 .cert-card img {
     display: block; width: 100%; height: 200px; margin-bottom: 8px;
     object-fit: contain; background: #f4f4f4; border: 1px solid #e8e8e8; border-radius: 6px;
 }
-.cert-card:hover img { border-color: #4a90e2; }
+.cert-card:hover { transform: scale(1.09); z-index: 2; }
+.cert-card:hover img { border-color: #4a90e2; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18); }
 .cert-card:focus-visible { outline: 2px solid #4a90e2; outline-offset: 3px; }
 .cert-embed { width: 150px; height: 270px; }
 @keyframes cert-scroll { to { transform: translateX(-50%); } }
@@ -71,6 +80,8 @@ header a { color: #d9d9d9; }
 
 @media (max-width: 768px) {
     .topbar { padding: 0 15px; }
+    header { padding-top: 70px; }
+    header .lang-switch { top: 16px; right: 16px; }
     .impact { grid-template-columns: repeat(2, 1fr); padding: 0 30px 10px; }
     .carousel { margin: 0 -30px; }
 }
